@@ -15,5 +15,14 @@ namespace Helpermore
             string a=str.Substring(str.Length-1);
             return a;
         }
+        public static string StringSubIndex(string str,int strlenth)
+        {
+            if(string.IsNullOrWhiteSpace(str))
+                throw new ArgumentNullException(nameof(str));
+            if(str.Length< strlenth)
+                throw new ArgumentNullException(nameof(str));
+            string a=str.Substring(0,strlenth);
+            return a;
+        }
     }
 }
