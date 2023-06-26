@@ -8,21 +8,45 @@ namespace Helpermore
 {
     public class StringSub
     {
-        public static string StringSubIndex(string str)
+        /// <summary>
+        /// 截取相应数量的字符串
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="strlenth">截取长度</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static string StringSubIndex(string str, int strlenth)
         {
-            if(string.IsNullOrWhiteSpace(str))
-                throw new ArgumentNullException(nameof(str));
-            string a=str.Substring(str.Length-1);
+            if (string.IsNullOrWhiteSpace(str))
+                throw new ArgumentNullException("字符串为空");
+            if (str.Length < strlenth)
+                throw new ArgumentNullException("截取长度大于字符串长度");
+            if(strlenth<=0)
+                throw new ArgumentException("截取长度不可为0");
+            string a = str[..strlenth];
             return a;
         }
-        public static string StringSubIndex(string str,int strlenth)
+        /// <summary>
+        /// 字符串之后的所有字符串
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="substr"></param>
+        /// <param name="subleng"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static string StringSubIndex(string str,string substr,int subleng = 0)
         {
             if(string.IsNullOrWhiteSpace(str))
-                throw new ArgumentNullException(nameof(str));
-            if(str.Length< strlenth)
-                throw new ArgumentNullException(nameof(str));
-            string a=str.Substring(0,strlenth);
-            return a;
+                throw new ArgumentNullException("字符串为空");
+            int index = 0;
+            if (str.Contains(substr))
+                index = str.IndexOf(substr) + substr.Length;
+            if (subleng > 0)
+                return str.Substring(index, subleng);
+            else
+                return str.Substring(index, str.Length - index);
         }
+
+
     }
 }
